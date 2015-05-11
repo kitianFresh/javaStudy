@@ -1,0 +1,121 @@
+this关键字：
+	1.用于指代本对象
+	2.用于指代类中的成员，解决变量同名问题
+
+static修饰符关键字：
+	static修饰的成员属于类（只有一份）而不属于某一个具体的对象，因此访问时可以通过对象引用或者类名（不需要实例化）
+	1.static修饰的成员变量（不能修饰局部变量）位于静态数据段，第一次使用便存在，直到程序运行结束。
+	2.static修饰的成员方法是静态方法，静态方法不再针对某一个对象，所以静态方法里面不能访问非静态成员（因为非静态成员属		于一个对象）
+	3.static一般用于计数
+
+
+package和import 
+
+	为了解决类命名冲突，java引入package管理，Java中的package结构层次对应于文件目录层次。
+
+	定义类：
+		package用于声明一个类位于某些包中；如果想将一个类放入包中，在这个类源文件第一句话写package
+
+
+	类的使用：
+		要想使用在包中的类，必须将该类的class文件让入正确的目录下；该类的源码可能产生影响，所以删除即可
+
+
+	访问类：
+		1.写全名
+		2.引入import  .*/.class
+		3.位于同一个包中的类不需要引入
+
+
+	jdk环境变量：
+		1.找class文件，class文件的最上层目录（即包名的最顶层）的父目录必须位于classpath之下；因此classpath一般都会			有一个"."表示当前目录中找；例如当有两个dog类时，一定要确保classpath中的路径中"."在最前面，让jvm先到当前目录			去找，再到其他指定目录找
+		2.执行一个类需要写全包名
+
+
+
+权限和继承：
+	类的成员的权限修饰符
+	
+	类的权限修饰符只有public和default：
+		default类只可以被同一个包内部的类访问
+		public类可以在任意地方被访问
+
+
+	重写：重写父类方法
+	super关键字，指向父类
+	继承中的构造方法：
+
+
+
+
+
+
+
+容器：
+	1、Collection接口
+       		Collection是最基本集合接口，它定义了一组允许重复的对象。Collection接口派生了两个子接口Set和List，分别定义了		两种不同的存储方式，如下：
+ 
+	2、 Set接口（数学意义上的集合）
+       		Set接口继承于Collection接口，它没有提供额外的方法，但实现了Set接口的集合类中的元素是无序且不可重复。
+       		特征：无序且不可重复。
+ 
+	3、  List接口
+        	List接口同样也继承于Collection接口，但是与Set接口恰恰相反，List接口的集合类中的元素是对象有序且可重复。
+       		特征：有序且可重复。
+       		两个重要的实现类：ArrayList和LinkedList
+       		1.ArrayList特点是有序可重复的
+       		2.LinkedList是一个双向链表结构的。
+ 
+	4、Map接口
+       		Map也是接口，但没有继承Collection接口。该接口描述了从不重复的键到值的映射。Map接口用于维护键/值（key/value 		pairs）。
+       		特征：它描述了从不重复的键到值的映射。
+       		两个重要的实现类：HashMap和TreeMap
+       		1.HashMap，中文叫散列表，基于哈希表实现，特点就是键值对的映射关系。一个key对应一个Value。HashMap中元素的排		列顺序是不固定的。更加适合于对元素进行插入、删除和定位。
+       		2.TreeMap，基于红黑书实现。TreeMap中的元素保持着某种固定的顺序。更加适合于对元素的顺序遍历。
+
+	5、Iterator接口
+       		Iterator接口，是java提供的一种统一访问集合的一种接口，用于循环访问集合中的对象。
+       		所有实现了Collection接口的容器类都有iterator方法，用于返回一个实现了Iterator接口的对象。Iterator对象称作迭		代器，Iterator接口方法能以迭代方式逐个访问集合中各个元素，并可以从Collection中除去适当的元素。
+      
+[csharp] view plaincopyprint?在CODE上查看代码片派生到我的代码片
+<span style="font-size:10px;">Iterator it = collection.iterator(); // 获得一个迭代子    
+while(it.hasNext())     
+{    
+Object obj = it.next(); // 得到下一个元素    
+} </span>  
+ 
+6、Comparable接口
+      Comparable可以用于比较的实现，实现了Comparable接口的类可以通过实现comparaTo方法从而确定该类对象的排序方式。
+
+Collections类
+	Collections是针对集合类的一个帮助类。提供了一系列静态方法实现对各种集合的搜索、排序、线程完全化等操作。
+
+
+/*****
+		泛型的产生主要是因为类型不明确
+		1.装入集合的类型都被当做Object对待，从而失去自己的实际类型
+		2.从集合中取出时往往需要转型，效率低，易产生错误
+		泛型使用,直接指明了对象类型
+		1.在定义集合的同时定义集合对象的类型
+		2.可在定义Collection是制定，也可以在循环时用Iterator制定本
+****/
+
+Array：
+
+
+Thread：
+	
+
+
+javaIO流：
+	流的输入输出是相对于程序而言的，程序是主体，因此输入流是指从数据源读入到程序中，输出流是指从程序写出到数据目地
+	按照一次处理的最小单位，又分为字节流（字节为单位InputStream和OutputStream，例如对于图像文件音频视频文件）和字符流（字符为单位（2字节）reader和writer，如对于文本文件）
+	按照流的功能分，又分为节点流（直接连接源和目的FileReader、FileWriter、FileInputStream、FileOutputStream）和处理流（包在节点流外面,例如缓冲流BufferedInputStream/BufferedOutputStream/BufferedReader/BufferedWriter(提高效率，可以一行一行的读写)、转换流InputStreamReader/OutputStreamWriter）
+
+
+
+Socket：
+
+
+
+GUI：

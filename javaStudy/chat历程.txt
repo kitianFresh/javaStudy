@@ -1,0 +1,11 @@
+1.chat0.3实现了Client端的图形显示及监听功能
+
+2.chat0.5实现了Server端的ServerSocket监听以及Client端的Socket连接；
+
+3.chat0.7实现了Server端和Client端的数据传输，使用IO流
+
+*4.chat0.9实现了Socket和IO流的异常处理，修复这个bug。特别是DataInputStream.readUTF()阻塞循环读和ServerSocket.accept()的阻塞
+
+*5.chat1.0实现了多个Client的并发操作，就是在服务端用异步或者多线程，这里使用多线程，版本改动大。每个Client对应服务端一个Client线程，每个Client线程有自己的Socket和DataInputStream
+
+*6.chat1.1修复客户端退出是SocketException的bug，主要是主线程子线程的问题。客户端退出Server端删除
